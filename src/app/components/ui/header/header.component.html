@@ -1,0 +1,29 @@
+<header class="header">
+  <div class="container">
+    <a routerLink="/" class="logo-link">
+      <img
+        class="logo-img"
+        src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/57A0EA5BFA41EA7991E8629C6563BC178462B0399E733A6249F8150F93ACFED8/scale?width=600&aspectRatio=1.78&format=webp">
+    </a>
+
+    <button class="menu-toggle" (click)="toggleMenu()">
+      <span class="menu-toggle-span"></span>
+    </button>
+    <nav class="header-nav" [class]="isMenuOpen ? 'openMenu' : ''">
+      <button class="close-menu" (click)="toggleMenu()"></button>
+      <ul class="header-menu">
+        @if(moviesList$ | async; as moviesList) {
+          @for(movie of moviesList; track movie.uid) {
+            <li class="header-menu-item">
+              <a
+                [routerLink]="['/movie', movie.uid]"
+                (click)="selectMovie(movie.uid)"
+                class="header-menu-link"
+              >{{movie.description}}</a>
+            </li>
+          }
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

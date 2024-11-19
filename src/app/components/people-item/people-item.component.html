@@ -1,0 +1,23 @@
+<div class="container">
+  @if (currentPeople$ | async; as currentPeople) {
+    <h3 class="text-center">{{ currentPeople.properties.name }}</h3>
+    <p class="text-center">{{ currentPeople.description }}</p>
+    <ul class="properties-list">
+      <li>Birth year: {{ currentPeople.properties.birth_year }}</li>
+      <li>Gender: {{ currentPeople.properties.gender }}</li>
+      <li>Hair color: {{ currentPeople.properties.hair_color }}</li>
+      <li>Height: {{ currentPeople.properties.height }}</li>
+      <li>Mass: {{ currentPeople.properties.mass }}</li>
+      <li>Skin Color: {{ currentPeople.properties.skin_color }}</li>
+    </ul>
+
+    <h3 class="text-center">Тут мала бути таблиця з фільмами, але зараз SWAPI не повертає інформацію про фільми в
+      ендпоїнті персонажу</h3>
+  } @else {
+    <div class="loader">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+
+
+</div>

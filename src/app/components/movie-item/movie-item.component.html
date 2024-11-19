@@ -1,0 +1,46 @@
+<div class="container">
+  @if (currentMovie$ | async; as currentMovie) {
+    <h3 class="title text-center">{{ currentMovie.properties.title }}</h3>
+    <ul class="properties-list">
+      <li>Producer: {{ currentMovie.properties.producer }}</li>
+      <li>Director: {{ currentMovie.properties.director }}</li>
+      <li>Release Date: {{ currentMovie.properties.release_date | date }}</li>
+    </ul>
+
+    <div class="description-container">
+      <p class="description-text text-center">
+        {{ currentMovie.properties.opening_crawl }}
+      </p>
+    </div>
+
+    @if ((currentPeople$ | async)?.length) {
+      <h3 class="title text-center">Characters</h3>
+      <div class="table-container">
+        <table mat-table [dataSource]="currentPeople$">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id</th>
+            <td mat-cell *matCellDef="let person"> {{ person.uid }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name</th>
+            <td mat-cell *matCellDef="let person"> <a [routerLink]="['/people', person.uid]" class="movie-title">{{ person.name }}</a></td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    } @else {
+      <div class="loader">
+        <mat-spinner></mat-spinner>
+      </div>
+    }
+
+  } @else {
+    <div class="loader">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+
+
+</div>

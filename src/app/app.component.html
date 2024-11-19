@@ -1,0 +1,7 @@
+<div class="main" [class]="isOverflowHidden ? 'overflow-hidden' : ''">
+  <app-header (openMenuEvent)="setOverflow($event)"></app-header>
+  <div class="movie-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
